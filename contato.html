@@ -3,36 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato - Meu Portfólio</title>
+    <title>Contato</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script>
+        function validarFormulario() {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (nome === '' || email === '' || mensagem === '') {
+                alert('Por favor, preencha todos os campos.');
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+                alert('Por favor, insira um e-mail válido.');
+                return false;
+            }
+
+            alert('Mensagem enviada com sucesso!');
+            document.getElementById('contatoForm').reset();
+            return false; // Evita o envio real do formulário
+        }
+    </script>
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Sobre mim</a></li>
+                <li><a href="index.html">Sobre Mim</a></li>
                 <li><a href="formacao.html">Formação</a></li>
                 <li><a href="portfolio.html">Portfólio</a></li>
                 <li><a href="contato.html">Contato</a></li>
             </ul>
+            <button id="toggle-theme">Alternar Modo</button>
         </nav>
     </header>
     <main>
         <h1>Contato</h1>
-        <form id="contactForm">
-            <label for="name">Nome:</label>
-            <input type="text" id="name" required>
+        <form id="contatoForm" onsubmit="return validarFormulario();">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
             <label for="email">E-mail:</label>
             <input type="email" id="email" required>
-            <label for="message">Mensagem:</label>
-            <textarea id="message" required></textarea>
+            <label for="mensagem">Mensagem:</label>
+            <textarea id="mensagem" required></textarea>
             <button type="submit">Enviar</button>
         </form>
-        <div id="confirmationMessage" style="display:none;"></div>
     </main>
     <footer>
         <p>&copy; 2026 Davi F D Guimarães</p>
     </footer>
+
+    <script>
+        const toggleThemeButton = document.getElementById('toggle-theme');
+        const body = document.body;
+
+        // Verifica se o tema foi salvo no localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark');
+        }
+
+        toggleThemeButton.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            
+            // Salva a preferência do tema no localStorage
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.removeItem('theme');
+            }
+        });
+    </script>
 </body>
 </html>

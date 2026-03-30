@@ -15,15 +15,37 @@
                 <li><a href="portfolio.html">Portfólio</a></li>
                 <li><a href="contato.html">Contato</a></li>
             </ul>
+            <button id="toggle-theme">Alternar Modo</button>
         </nav>
     </header>
     <main>
         <h1>Portfólio</h1>
-        <p>No momento, não tenho nenhum trabalho publicado.</p>
+        <p>No momento não tenho trabalhos publicados.</p>
         <p>Além disso, por enquanto, não tenho interesse em me dedicar à área de desenvolvimento.</p>
     </main>
     <footer>
-        <p>&copy; 2026 Davi F D Guimaraes</p>
+        <p>&copy; 2026 Davi F D Guimarães</p>
     </footer>
+
+    <script>
+        const toggleThemeButton = document.getElementById('toggle-theme');
+        const body = document.body;
+
+        // Verifica se o tema foi salvo no localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark');
+        }
+
+        toggleThemeButton.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            
+            // Salva a preferência do tema no localStorage
+            if (body.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.removeItem('theme');
+            }
+        });
+    </script>
 </body>
 </html>
